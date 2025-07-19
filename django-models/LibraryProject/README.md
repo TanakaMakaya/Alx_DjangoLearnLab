@@ -1,0 +1,1 @@
+installed django    django-admin --version - 5.2.4
