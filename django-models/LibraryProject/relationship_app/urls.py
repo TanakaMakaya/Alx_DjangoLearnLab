@@ -13,5 +13,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='relationship_app/logout.html'), name='logout'),
 
     # ✅ Your custom register view
-    path('register/', views.register_view, name='register'),
+    path('register/', views.UserCreationForm, name='register'),
 ]
