@@ -92,6 +92,7 @@ def list_all_books_in_library():
         print()
 
 def retrieve_librarian_for_library():
+    Librarian.objects.get(library=library)
     """
     Retrieve the librarian for a library using OneToOneField relationship
     """
