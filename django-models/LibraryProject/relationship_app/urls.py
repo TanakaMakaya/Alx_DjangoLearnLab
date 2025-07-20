@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.contrib.auth.views import LoginView, LogoutView
 from .views import list_books, LibraryDetailView
+from django.contrib.auth.forms import UserCreationForm
 
 
 urlpatterns = [
@@ -13,5 +14,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='relationship_app/logout.html'), name='logout'),
 
     # ✅ Your custom register view
-    path('register/', views.UserCreationForm, name='register'),
+    path('register/', views.register, name='register'),
 ]

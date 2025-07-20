@@ -25,7 +25,7 @@ def logout_view(request):
     # Your logout logic here
     return render(request, 'logout.html')
 
-def UserCreationForm(request):
+def register(request):
     return render(request, 'register.html')
     
     
