@@ -17,3 +17,10 @@ class Library(models.Model):
 class Librarian(models.Model):
     name = models.CharField(max_length=100)
     library = models.ForeignKey(Library, on_delete=models.CASCADE)
+
+class UserProfile(models.Mode):
+    admin = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+    member = models.ForeignKey(Library, null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.user.username
