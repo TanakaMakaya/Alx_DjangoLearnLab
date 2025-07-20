@@ -5,6 +5,8 @@ from .models import Book
 from django.contrib.auth import logout
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import user_passes_test, login_required
+from django.shortcuts import render, redirect
 
 
 # Function-based view for listing books
@@ -39,4 +41,23 @@ def usercreationform_view(request):
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
     
-    
+
+def check_role(role):
+    def decorator(user):
+        return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == role
+    return user_passes_test(decorator)
+
+@login_required
+@check_role('Admin')
+def admin_view(request):
+    return render(request, 'admin_view.html')
+
+@login_required
+@check_role('Librarian')
+def librarian_view(request):
+    return render(request, 'librarian_view.html')
+
+@login_required
+@check_role('Member')
+def member_view(request):
+    return render(request, 'member_view.html')
