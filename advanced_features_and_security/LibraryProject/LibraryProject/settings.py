@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-bp_m#rh9tmw^7if)h2jv6_u6gl+4#=%k1+l)cg-*ts8gbr-!uy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    bookshelf.CustomUser
-]
+ALLOWED_HOSTS = []
+
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
 
 
 # Application definition
