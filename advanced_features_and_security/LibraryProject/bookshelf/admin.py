@@ -2,6 +2,7 @@
 
 from django.contrib import admin
 from .models import Book
+from .models import CustomUser, CustomUserAdmin
 
 # Basic registration (simple approach)
 # admin.site.register(Book)
@@ -36,3 +37,5 @@ class BookAdmin(admin.ModelAdmin):
     #         'fields': ('title', 'author', 'publication_year')
     #     }),
     # )
+
+admin.site.register(CustomUser, CustomUserAdmin)

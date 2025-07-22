@@ -23,7 +23,7 @@ class CustomUserAdmin(admin.ModelAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
 
-admin.site.register(CustomUser, CustomUserAdmin)
+
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
