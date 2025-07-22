@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin, AbstractUser
+from django.contrib import admin
 
 # Create your models here.
 
@@ -15,6 +16,14 @@ class Book(models.Model):
 class CustomUser(AbstractUser):
     date_of_birth = models.DateField(null=True, blank=True)
     profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
+
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_active')
+    list_filter = ('is_staff', 'is_active')
+    search_fields = ('email', 'first_name', 'last_name')
+    ordering = ('email',)
+
+admin.site.register(CustomUser, CustomUserAdmin)
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -37,4 +46,4 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
         
         return self.create_user(email, password, **extra_fields)
-        
+
