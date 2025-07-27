@@ -1,6 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin, AbstractUser
+from django.contrib.auth.models import BaseUserManager, AbstractUser
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _  
+
 
 # Create your models here.
 
@@ -14,8 +16,15 @@ class Book(models.Model):
         return self.title
 
 class CustomUser(AbstractUser):
+    email = models.EmailField(unique=True)
     date_of_birth = models.DateField(null=True, blank=True)
     profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    def __str__(self):
+        return self.email
 
 class CustomUserAdmin(admin.ModelAdmin):
     list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_active')
@@ -44,6 +53,7 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Superuser must have is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
-        
         return self.create_user(email, password, **extra_fields)
+
+
 

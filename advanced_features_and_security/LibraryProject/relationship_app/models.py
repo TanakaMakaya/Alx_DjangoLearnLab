@@ -20,6 +20,8 @@ class Book(models.Model):
             ("can_change_book", "Can change a book"),
             ("can_delete_book", "Can delete a book"),
         ]
+    def __str__(self):
+        return self.title
 
 class Library(models.Model):
     name = models.CharField(max_length=100)
