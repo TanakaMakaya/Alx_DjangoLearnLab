@@ -38,3 +38,11 @@ class UserProfile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
+
+class meta (models.Model):
+    class Meta:
+        can_add_book = models.BooleanField(default=False)
+        can_change_book = models.BooleanField(default=False)
+        can_delete_book = models.BooleanField(default=True)
+        can_view_book = models.BooleanField(default=True)
+          
