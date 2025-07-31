@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractUser
-from django.contrib import admin
-from django.utils.translation import gettext_lazy as _  
 
 
 # Create your models here.
@@ -14,25 +12,6 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
-
-class CustomUser(AbstractUser):
-    email = models.EmailField(unique=True)
-    date_of_birth = models.DateField(null=True, blank=True)
-    profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
-    def __str__(self):
-        return self.email
-
-class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_active')
-    list_filter = ('is_staff', 'is_active')
-    search_fields = ('email', 'first_name', 'last_name')
-    ordering = ('email',)
-
-
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -54,6 +33,19 @@ class CustomUserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
         return self.create_user(email, password, **extra_fields)
+
+class CustomUser(AbstractUser):
+    email = models.EmailField(unique=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+    profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email
 
 
 
