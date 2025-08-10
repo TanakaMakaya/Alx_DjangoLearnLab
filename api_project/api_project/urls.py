@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.db import router
 from django.urls import path, include
 
-from api_project.api.views import BookList # Import include
+from api_project.api.views import BookList, BookViewSet # Import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,3 +32,4 @@ urlpatterns = [
     path('', include(router.urls)),  # This includes all routes registered with the router
 ]
 
+router.register(r'books_all', BookViewSet, basename='book_all')
