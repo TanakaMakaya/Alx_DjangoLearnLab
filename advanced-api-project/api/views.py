@@ -9,7 +9,7 @@ from .serializers import BookSerializer
 # --------------------
 # LIST & CREATE VIEW
 # --------------------
-class BookListCreateView(generics.ListCreateAPIView):
+class ListView(generics.ListCreateAPIView):
     """
     Handles:
     - GET /books/ → list all books
