@@ -18,15 +18,13 @@ class ListView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-    # Only authenticated users can POST (create)
+   
     def get_permissions(self):
         if self.request.method == "POST":
             return [permissions.IsAuthenticated()]
         return [permissions.AllowAny()]
 
 
-# --------------------
-# RETRIEVE, UPDATE, DELETE VIEW
 # --------------------
 class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
