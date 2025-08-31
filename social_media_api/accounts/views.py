@@ -7,6 +7,7 @@ from .serializers import UserSerializer
 
 class FollowUserView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    generics.GenericAPIView
 
     def post(self, request, user_id):
         user_to_follow = get_object_or_404(CustomUser, id=user_id)
@@ -33,3 +34,4 @@ class FollowingListView(generics.ListAPIView):
 
     def get_queryset(self):
         return self.request.user.following.all()
+
